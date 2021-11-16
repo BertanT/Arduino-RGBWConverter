@@ -1,0 +1,7 @@
+# Syntax Coloring Map For RGBWConverter
+
+# Class
+RGBWConverter	KEYWORD1
+
+# Methods and Functions
+RGBToRGBW	KEYWORD2
