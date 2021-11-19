@@ -21,15 +21,35 @@ RGBWConverter::RGBWConverter(uint8_t wTempRed = 255, uint8_t wTempGreen = 255, u
 int* RGBWConverter::RGBToRGBW(uint8_t r, uint8_t g, uint8_t b)
 {
     // Calculate all of the color's white values corrected taking into account the white color temperature.
-    float wRed = r * (_wTempRed / 255);
-    float wGreen = g * (_wTempGreen / 255);
-    float wBlue = b * (_wTempBlue / 255);
-    // Chose the smallest white value from above to be the output white value.
-    uint8_t wOut = round(min(wRed, min(wGreen, wBlue)));
+    float wRed = r * (255 / _wTempRed);
+    float wGreen = g * (255 / _wTempGreen);
+    float wBlue = b * (255 / _wTempBlue);
+    
+    // Determine the smallest white value from above.
+    uint8_t wMin = round(min(wRed, min(wGreen, wBlue)));
+    
+    // Make the color with the smallest white value to be the output white value
+    uint8_t wOut;
+    if (wMin == wRed) {
+        wOut = wRed;
+    } else if (wMin == wGreen) {
+        wOut = wGreen;
+    }else {
+        wOut = wBlue;
+    }
+    
     // Calculate the output red, green and blue values, taking into account the white color temperature.
     uint8_t rOut = round(r - wOut * (_wTempRed / 255));
     uint8_t gOut = round(g - wOut * (_wTempGreen / 255));
-    uint8_t bOut = round(b - wOut * ((_blueCorrectionEnabled ? 0.1 : 1) * (_wTempBlue / 255)));
+    uint8_t bOut = round(b - wOut * (_wTempBlue / 255));
+    
+    // Apply the blue correction in enabled.
+    //This is required on some RGBW NeoPixels which have a little bit of mixed into the blue color.
+    if (_blueCorrectionEnabled)
+    {
+        wOut -= bOut * 0.2;
+    }
+    
     // Return the output values.
     static int output[4] = {rOut, gOut, bOut, wOut};
     return output;

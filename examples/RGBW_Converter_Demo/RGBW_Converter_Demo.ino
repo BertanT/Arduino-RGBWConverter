@@ -1,7 +1,7 @@
 /*
-	RGBW Converter Test
+  RGBW Converter Test
 
-	This code shows a given RGB color value and its RGBW conversion with an interval of  1 second
+  This code shows a given RGB color value and its RGBW conversion with an interval of  1 second
   on RGBW NeoPixel LEDs. Check out the line comments to adjust the settings to your liking!
   RGBW NeoPixel hardware and the Adafruit Neopixel Library are required for this example.
 
@@ -9,16 +9,18 @@
   https://learn.adafruit.com/adafruit-neopixel-uberguide
 
 
-	Circuitry - Using an Arduino Uno & Not a Large Number of NeoPixels:
-	* NeoPixel PWR +5V    -> Arduino 5V Pin
-	* NeoPixel GND        -> Arduino GND Pin
+  Circuitry - Using an Arduino Uno & Not a Large Number of NeoPixels:
+  * NeoPixel PWR +5V    -> Arduino 5V Pin
+  * NeoPixel GND        -> Arduino GND Pin
   * NeoPixel Data Input -> Arduino Digital Pin 10 (Add a 470 Ohm resistor if your NeoPixels don't have one built-in!)
 
-	Created and modified on November 14, 2021.
-	By M. Bertan Tarakçıoğlu.
+  Created November 14, 2021
+  By M. Bertan Tarakçıoğlu.
+  Modified November 19, 2021
+  By M. Bertan Tarakçıoğlu.
 
   For more in-depth library documentation, see the GitHub repo below.  
-	https://github.com/BertanT/Arduino-RGBWConverter
+  https://github.com/BertanT/Arduino-RGBWConverter
 
   Copyright (c) 2021 M. Bertan Tarakçıoğlu, Licensed under the MIT License.
 
@@ -38,9 +40,9 @@
 #define LED_BRIGHTNESS 150
 
 // Define the RGB values to be converted to RGBW.
-#define R 153
+#define R 53
 #define G 42
-#define B 53
+#define B 153
 
 // Declare the NeoPixels...
 // Change the "NEO_GRBW" argument to "NEO_RGBW" if you are getting unexpected results!
@@ -51,7 +53,7 @@ Adafruit_NeoPixel pixels(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
 // In my case the values below worked pretty well. Try adjusting them for yourself to get the best results!
 // * The fourth argument is a boolean which enables blue tone correction when set to true. In some RGBW NeoPixels, the blue color
 //   is mixed with white. Thus enabling blue correction is crucial for color accuracy.
-RGBWConverter converter(255, 255, 255, true);
+RGBWConverter converter(240, 215, 200, true);
 
 // Initialize the global variables, their values to be set later inside the setup function.
 uint32_t rgbColor;
@@ -71,6 +73,9 @@ void setup() {
 
   // Create the RGBW Color object using the converted values and assign it to rgbwColor.
   rgbwColor = pixels.Color(c[0], c[1], c[2], c[3]);
+  Serial.begin(9600);
+  Serial.println(rgbColor);
+  Serial.println(rgbwColor);
 }
 
 void loop() {
