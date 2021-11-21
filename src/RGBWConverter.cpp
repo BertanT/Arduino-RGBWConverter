@@ -13,7 +13,7 @@ RGBWConverter::RGBWConverter(uint8_t wTempRed = 255, uint8_t wTempGreen = 255, u
     _wTempRed = wTempRed;
     _wTempGreen = wTempGreen;
     _wTempBlue = wTempBlue;
-    // Set blue correctiion. If enabled, the blue color will be corrected to the white color temperature.
+    // Set blue correctiion. If enabled, the blue color will be corrected for RGBW LEDs that mix white to the blue color.
     _blueCorrectionEnabled = blueCorrectionEnabled;
 }
 
