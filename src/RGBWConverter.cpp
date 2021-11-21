@@ -31,11 +31,11 @@ int* RGBWConverter::RGBToRGBW(uint8_t r, uint8_t g, uint8_t b)
     // Make the color with the smallest white value to be the output white value
     uint8_t wOut;
     if (wMin == wRed) {
-        wOut = wRed;
+        wOut = r;
     } else if (wMin == wGreen) {
-        wOut = wGreen;
+        wOut = g;
     }else {
-        wOut = wBlue;
+        wOut =  b;
     }
     
     // Calculate the output red, green and blue values, taking into account the white color temperature.
