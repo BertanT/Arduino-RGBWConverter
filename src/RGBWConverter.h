@@ -10,8 +10,12 @@
 class RGBWConverter
 {
     public:
+        struct RGBW {
+          uint8_t r, g, b, w;
+        };
+    public:
         RGBWConverter(uint8_t wTempRed, uint8_t wTempGreen, uint8_t wTempBlue, bool blueCorrectionEnabled);
-        int* RGBToRGBW(uint8_t r, uint8_t g, uint8_t b);
+        RGBW RGBToRGBW(uint8_t r, uint8_t g, uint8_t b);
     private:
         uint8_t _wTempRed;
         uint8_t _wTempGreen;

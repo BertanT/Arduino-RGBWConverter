@@ -69,10 +69,10 @@ void setup() {
   rgbColor = pixels.Color(R, G, B, 0);
 
   // Convert the RGB color values to RGBW - results returned in an integer array as follows: {R, G, B, W}
-  int* c = converter.RGBToRGBW(R, G, B);
+  auto c = converter.RGBToRGBW(R, G, B);
 
   // Create the RGBW Color object using the converted values and assign it to rgbwColor.
-  rgbwColor = pixels.Color(c[0], c[1], c[2], c[3]);
+  rgbwColor = pixels.Color(c.r, c.g, c.b, c.w);
   Serial.begin(9600);
   Serial.println(rgbColor);
   Serial.println(rgbwColor);

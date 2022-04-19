@@ -18,7 +18,7 @@ RGBWConverter::RGBWConverter(uint8_t wTempRed = 255, uint8_t wTempGreen = 255, u
 }
 
 // The  RGB to RGBW conversion function.
-int* RGBWConverter::RGBToRGBW(uint8_t r, uint8_t g, uint8_t b)
+RGBWConverter::RGBW RGBWConverter::RGBToRGBW(uint8_t r, uint8_t g, uint8_t b)
 {
     // Calculate all of the color's white values corrected taking into account the white color temperature.
     float wRed = r * (255 / _wTempRed);
@@ -51,6 +51,10 @@ int* RGBWConverter::RGBToRGBW(uint8_t r, uint8_t g, uint8_t b)
     }
     
     // Return the output values.
-    static int output[4] = {rOut, gOut, bOut, wOut};
+    RGBWConverter::RGBW output;
+    output.r = rOut;
+    output.g = gOut;
+    output.b = bOut;
+    output.w = wOut;
     return output;
 }
